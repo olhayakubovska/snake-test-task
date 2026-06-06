@@ -167,7 +167,13 @@ body {
   font-weight: 700;
   color: #f8fff9;
   cursor: pointer;
-  border: none;
+  border: 0.2px solid transparent;
+  border-image: linear-gradient(to bottom, #84375dd1, #000000) 1;
+  outline: none;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: none;
   background: linear-gradient(180deg, #16694e 0%, #0f4235 100%);
 }
 
