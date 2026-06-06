@@ -17,86 +17,59 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
 }
 
 #game-window {
   display: flex;
-  width: 100vw;
-  height: 100vh;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
   overflow: hidden;
 }
 
 #playfield {
-  width: 100%;
-  height: 100%;
+  width: 560px;
+  height: 560px;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   box-sizing: border-box;
-
+  padding: 40px;
   background-color: #a67028;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+    linear-gradient(rgba(0, 0, 0, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.18) 1px, transparent 1px);
   background-size: 40px 40px;
-
-  padding: 40px;
 }
 
 #pixi-app {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  background: #5e5f62;
-  position: relative;
-  z-index: 2;
+  width: 480px;
+  height: 480px;
+  flex-shrink: 0;
   overflow: hidden;
-
-  box-shadow:
-    inset 0 0 10px rgba(0, 0, 0, 0.5),
-    0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-#playfield::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: #a67028;
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
-  background-size: 40px 40px;
-  box-sizing: border-box;
-
-  z-index: 1;
-  pointer-events: none;
-}
-
-canvas,
 #pixi-app canvas {
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
 }
 
 .panel {
-  width: 620px;
-  height: 100%;
+  width: 280px;
+  height: 560px;
+  flex-shrink: 0;
   background: linear-gradient(180deg, #0d5f69 0%, #06646b 100%);
-  padding: 30px 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   box-sizing: border-box;
 }
 
 .panel h1 {
   margin: 0;
-  font-size: 60px;
+  font-size: 26px;
   line-height: 1;
   color: #b8f6bb;
   text-align: center;
@@ -107,20 +80,21 @@ canvas,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 18px;
+  padding: 8px 16px;
   background: #04393d;
 }
 
 .score-row:first-of-type {
   background: #0b4c51;
 }
+
 .score-label {
-  font-size: 40px;
+  font-size: 18px;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .score-value {
-  font-size: 40px;
+  font-size: 18px;
   font-weight: 700;
   color: #f2fff5;
 }
@@ -128,33 +102,58 @@ canvas,
 .mode-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 18px;
+  gap: 6px;
+  padding: 10px 16px;
   background: rgba(0, 0, 0, 0.12);
 }
 
 .mode-option {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-size: 40px;
+  gap: 10px;
+  font-size: 15px;
   color: #f3fff9;
   cursor: pointer;
   user-select: none;
 }
 
-.mode-option input {
-  width: 28px;
-  height: 28px;
-  accent-color: blue;
+.mode-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  flex-shrink: 0;
+  border-radius: 3px;
+  background-color: #ffffff !important;
   cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.mode-option input[type="radio"]:checked {
+  background-color: #2563eb !important;
+  border-color: #2563eb;
+}
+
+.mode-option input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
 }
 
 .panel-actions {
   display: flex;
-  gap: 16px;
+  gap: 8px;
   margin-top: auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
 .menu-actions {
@@ -163,11 +162,12 @@ canvas,
 
 .menu-button {
   flex: 1;
-  padding: 30px;
-  font-size: 40px;
+  padding: 12px 8px;
+  font-size: 15px;
   font-weight: 700;
   color: #f8fff9;
   cursor: pointer;
+  border: none;
   background: linear-gradient(180deg, #16694e 0%, #0f4235 100%);
 }
 
@@ -176,8 +176,7 @@ canvas,
 }
 
 .menu-button:active {
-  transform: translateY(4px);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
 }
 
 .menu-button-secondary {

@@ -100,16 +100,15 @@ export default class Berry {
   }
 
   draw(pixi) {
+    const g = pixi.graphics;
+    const s = this.config.sizeCell;
+
     this.berries.forEach((berry) => {
-      const berryDraw = new PIXI.Graphics();
-      berryDraw.rect(berry.x, berry.y, this.config.sizeCell, this.config.sizeCell).fill("#124909");
-      this.pixi.container.addChild(berryDraw);
+      g.rect(berry.x, berry.y, s, s).fill("#124909");
     });
 
     this.walls.forEach((wall) => {
-      const wallDraw = new PIXI.Graphics();
-      wallDraw.rect(wall.x, wall.y, this.config.sizeCell, this.config.sizeCell).fill("#808080");
-      this.pixi.container.addChild(wallDraw);
+      g.rect(wall.x, wall.y, s, s).fill("#808080");
     });
   }
 }

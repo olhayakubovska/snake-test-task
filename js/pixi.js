@@ -15,16 +15,8 @@ export default class Pixi {
     instance.container = new PIXI.Container();
     instance.app.stage.addChild(instance.container);
 
-    const resize = () => {
-      const w = pixiConteiner.clientWidth;
-      const h = pixiConteiner.clientHeight;
-      const size = Math.min(w, h);
-      instance.app.canvas.style.width = size + 'px';
-      instance.app.canvas.style.height = size + 'px';
-    };
-
-    window.addEventListener('resize', resize);
-    resize();
+    instance.graphics = new PIXI.Graphics();
+    instance.container.addChild(instance.graphics);
 
     return instance;
   }

@@ -11,15 +11,14 @@ export default class GameLoop {
   }
 
   animate() {
-    this.pixi.app.ticker.add((delta) => {
+    this.pixi.app.ticker.add(() => {
       this.config.step += 1;
-      if (this.config.step < this.config.maxStep) {
-        return;
+      const progress = this.config.step / this.config.maxStep;
+      this.draw(progress);
+      if (this.config.step >= this.config.maxStep) {
+        this.config.step = 0;
+        this.update();
       }
-      this.config.step = 0;
-
-      this.update();
-      this.draw();
     });
   }
 }

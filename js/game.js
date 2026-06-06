@@ -15,11 +15,6 @@ class Game {
     this.score = new Score(".score-count", ".best-value", 0, 0);
     this.isRunning = false;
 
-    this.modeClassic = document.getElementById("mode-classic");
-    this.modeNoDie = document.getElementById("mode-no-die");
-    this.modeWalls = document.getElementById("mode-walls");
-    this.modePortal = document.getElementById("mode-portal");
-    this.modeSpeed = document.getElementById("mode-speed");
     this.playButton = document.getElementById("play-button");
     this.exitButton = document.getElementById("exit-button");
     this.menuButton = document.getElementById("menu-button");
@@ -56,24 +51,14 @@ class Game {
   }
 
   applyModes() {
-    const classic = this.modeClassic?.checked ?? true;
-    const noDie = this.modeNoDie?.checked ?? false;
-    const walls = this.modeWalls?.checked ?? false;
-    const portal = this.modePortal?.checked ?? false;
-    const speed = this.modeSpeed?.checked ?? false;
+    const selected = document.querySelector('input[name="game-mode"]:checked')?.value ?? 'classic';
 
-    this.mode = {
-      classic,
-      noDie,
-      walls,
-      portal,
-      speed,
-    };
+    const noDie = selected === 'god';
+    const walls = selected === 'walls';
+    const portal = selected === 'portal';
+    const speed = selected === 'speed';
 
-    if (!classic && !noDie) {
-      this.mode.classic = true;
-    }
-
+    this.mode = { noDie, walls, portal, speed };
     this.config.maxStep = Config.MAX_STEP;
 
     if (this.snake) {
@@ -102,11 +87,7 @@ class Game {
 
     this.berry.clear();
     const occupied = this.getOccupiedCells();
-    if (this.mode.portal) {
-      this.berry.spawnFood(2, occupied);
-    } else {
-      this.berry.spawnFood(1, occupied);
-    }
+    this.berry.spawnFood(this.mode.portal ? 2 : 1, occupied);
   }
 
   getOccupiedCells() {
@@ -121,10 +102,10 @@ class Game {
     this.snake.update(this.berry, this.score, this.config);
   }
 
-  draw() {
-    this.pixi.container.removeChildren();
+  draw(progress = 1) {
+    this.pixi.graphics.clear();
     if (!this.isRunning) return;
-    this.snake.draw(this.pixi);
+    this.snake.draw(this.pixi, progress);
     this.berry.draw(this.pixi);
   }
 }
