@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/main.css">
+    <script src="js/pixi.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="game">
+        <div id="game-window">
+            <div id="playfield">
+                <div id="pixi-app"></div>
+            </div>
+            <div id="panel" class="panel menu-state">
+                <h1>Snake Game</h1>
+                <div class="score-row">
+                    <span class="score-label">Best :</span>
+                    <span class="score-value best-value">0</span>
+                </div>
+                <div class="score-row">
+                    <span class="score-label">Score :</span>
+                    <span class="score-value score-count">0</span>
+                </div>
+                <div id="mode-panel" class="mode-panel">
+                    <label class="mode-option"><input id="mode-classic" name="game-mode" type="radio" value="classic" checked> Classic</label>
+                    <label class="mode-option"><input id="mode-no-die" name="game-mode" type="radio" value="god"> God Mode</label>
+                    <label class="mode-option"><input id="mode-walls" type="checkbox"> Walls</label>
+                    <label class="mode-option"><input id="mode-portal" type="checkbox"> Portal</label>
+                    <label class="mode-option"><input id="mode-speed" type="checkbox"> Speed</label>
+                </div>
+                <div class="panel-actions menu-actions">
+                    <button id="play-button" class="menu-button">Play</button>
+                    <button id="exit-button" class="menu-button menu-button-secondary">Exit</button>
+                </div>
+                <div class="panel-actions play-actions hidden">
+                    <button id="menu-button" class="menu-button menu-button-secondary">Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/game.js"></script>
+</body>
+</html>
